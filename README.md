@@ -12,22 +12,58 @@ ESPHome firmware for Kiwi S19E WiFi Smart Socket.
 
 ## Hardware
 
-| Component | GPIO |
-|------------|-------|
-| Relay | GPIO12 |
-| Switch | GPIO5 |
-| Button | GPIO13 |
-| LED | GPIO4 |
+Mạch ổ cắm thông minh Kiwi S19E sử dụng module **TYWE2S** (chạy chip ESP8285).
 
-![Sơ đồ chân GPIO Kiwi S19E](images/GPIO.png)
+| Component | GPIO | Chi tiết |
+|------------|-------| --- |
+| **Relay** | GPIO12 | Điều khiển bật/tắt nguồn ổ cắm |
+| **Switch** | GPIO5 | Công tắc phụ/Cảm biến trạng thái |
+| **Button** | GPIO13 | Nút nhấn vật lý trên thân ổ cắm |
+| **LED** | GPIO4 | Đèn LED báo trạng thái |
 
-## Installation
+---
 
-1. Install ESPHome
-2. Copy `secrets.example.yaml` to `secrets.yaml`
-3. Configure WiFi credentials
-4. Flash the firmware
+## Giao diện Home Assistant Dashboard
 
-## Home Assistant
+Sau khi nạp thành công và tích hợp qua ESPHome, thiết bị sẽ hiển thị đầy đủ các thực thể điều khiển và cảm biến như hình dưới:
 
-The device is automatically discovered through the ESPHome integration.
+![Home Assistant Dashboard Interface](images/Esphome_UI.jpg)
+
+---
+
+## Hướng dẫn đấu nối và nạp Firmware (Flashing Guide)
+
+Để nạp firmware ESPHome lần đầu cho module **TYWE2S**, bạn cần sử dụng một mạch chuyển đổi **USB-to-UART (FTDI/CH340)** hỗ trợ dòng ra **3.3V**. 
+
+> ⚠️ **QUAN TRỌNG:** Tuyệt đối KHÔNG cắm ổ cắm vào nguồn điện 220V trong suốt quá trình câu dây và nạp phần mềm. Chỉ cấp nguồn qua mạch FTDI (3.3V).
+
+### 1. Sơ đồ đấu nối chân (Pinout)
+
+Kết nối các chân từ module TYWE2S sang mạch nạp USB-to-UART theo sơ đồ sau:
+
+| Module TYWE2S | Mạch nạp FTDI / UART | Ghi chú |
+| :--- | :--- | :--- |
+| **3V3** | 3.3V | Cấp nguồn (Không dùng 5V) |
+| **GND** | GND | Chân tiếp địa chung |
+| **TX** | RXD | Chân truyền tín hiệu |
+| **RX** | TXD | Chân nhận tín hiệu |
+| **IO0** | GND | **Nối tắt vào GND trước khi cấp nguồn** để vào chế độ Flash (Flash Mode) |
+
+![Sơ đồ câu dây nạp TYWE2S](images/GPIO.png)
+
+### 2. Hình ảnh câu dây thực tế
+
+Hình ảnh hàn dây thực tế từ mạch nạp USB UART vào bo mạch của ổ cắm Kiwi S19E:
+
+![Thực tế câu dây nạp firmware Kiwi S19E](images/Flash.jpg)
+
+---
+
+## Các bước tiến hành cài đặt
+
+1. Cài đặt môi trường **ESPHome** trên máy tính hoặc sử dụng Add-on trên Home Assistant.
+2. Copy file `secrets.example.yaml` thành `secrets.yaml` và cấu hình thông tin WiFi của bạn.
+3. **Vào chế độ Flash:** Giữ kết nối chân `IO0` với `GND`, sau đó cắm mạch nạp USB vào máy tính.
+4. Tiến hành biên dịch và nạp firmware bằng lệnh:
+   ```bash
+   esphome run kiwi_s19e.yaml
