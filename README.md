@@ -78,7 +78,7 @@ Nếu không muốn cài đặt môi trường ESPHome, bạn có thể flash tr
      * **SSID:** `S19E-Kiwi`
      * **Password:** `888888889`
    * Sau khi kết nối thành công, một trang web sẽ tự động hiển thị (hoặc bạn truy cập địa chỉ `192.168.4.1`) để bạn nhập tên và mật khẩu WiFi nhà mình.
-   * 
+
 ### Cách 2: Tự biên dịch bằng ESPHome (Tùy biến cấu hình)
 Sử dụng cách này nếu bạn muốn chỉnh sửa nâng cao hoặc thay đổi thông số mặc định:
 
