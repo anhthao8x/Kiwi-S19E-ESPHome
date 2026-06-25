@@ -19,7 +19,7 @@ ESPHome firmware for Kiwi S19E WiFi Smart Socket.
 | Button | GPIO13 |
 | LED | GPIO4 |
 
-(images/GPIO.png)
+![Sơ đồ chân GPIO Kiwi S19E](images/GPIO.png)
 
 ## Installation
 
