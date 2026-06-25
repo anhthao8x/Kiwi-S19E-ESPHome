@@ -15,8 +15,8 @@ preferences: # điều chỉnh thời gian ghi flash
   flash_write_interval: 90s
 
 # Enable logging
-#logger:
-#  level: INFO
+logger:
+  level: INFO
 
 # Enable Home Assistant native API
 api:
@@ -46,13 +46,13 @@ captive_portal:
       
 binary_sensor:
   - platform: gpio
-    internal: False
+    internal: false
     filters:
       - delayed_on_off: 30ms
     pin:
       number: GPIO05
       mode: INPUT_PULLUP
-      inverted: True
+      inverted: true
     name: "Công tắc"                # Dùng thêm cho nút công tắc cơ
     icon: mdi:toggle-switch-outline
     on_state:
@@ -60,13 +60,13 @@ binary_sensor:
         switch.toggle: relay
 
   - platform: gpio
-    internal: False
+    internal: false
     filters:
       - delayed_on_off: 30ms
     pin:
       number: GPIO13
       mode: INPUT_PULLUP
-      inverted: True
+      inverted: true
     name: "Button"                  # Nút nhấn có sẵn trên Switch, có thể triển khai làm Event
     icon: mdi:gesture-tap-button
     on_press:
@@ -89,7 +89,7 @@ button:
   - platform: factory_reset
     name: "ESP Factory Reset"
     id: factory_reset_all
-    disabled_by_default: True
+    disabled_by_default: true
         
 switch:
   - platform: gpio
@@ -102,4 +102,4 @@ switch:
 status_led:
   pin:
     number: GPIO04
-    inverted: False
+    inverted: false
