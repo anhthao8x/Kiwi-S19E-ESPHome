@@ -1,0 +1,105 @@
+esphome:
+  name: s19e
+  friendly_name: Switch
+  name_add_mac_suffix: true
+  project: 
+    name: "AnhThao.S19E" 
+    version: "ESP8285"
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+  early_pin_init: false # Prevent the physical relay flipping on reboot.
+
+preferences: # điều chỉnh thời gian ghi flash
+  flash_write_interval: 90s
+
+# Enable logging
+#logger:
+#  level: INFO
+
+# Enable Home Assistant native API
+api:
+  #encryption:
+  #  key: !secret api_encryption_key
+
+# Enable OTA firmware updates (via ESPHome)
+ota:
+  - platform: esphome
+    #password: !secret ota_password
+
+wifi:
+  #ssid: !secret wifi_ssid
+  #password: !secret wifi_password
+  min_auth_mode: WPA2
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "S19E-Kiwi"
+    password: !secret ap_password
+
+captive_portal:
+
+#web_server:
+ #version: 2
+ #port: 80
+      
+binary_sensor:
+  - platform: gpio
+    internal: False
+    filters:
+      - delayed_on_off: 30ms
+    pin:
+      number: GPIO05
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Công tắc"                # Dùng thêm cho nút công tắc cơ
+    icon: mdi:toggle-switch-outline
+    on_state:
+      then:
+        switch.toggle: relay
+
+  - platform: gpio
+    internal: False
+    filters:
+      - delayed_on_off: 30ms
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Button"                  # Nút nhấn có sẵn trên Switch, có thể triển khai làm Event
+    icon: mdi:gesture-tap-button
+    on_press:
+      then:
+        switch.toggle: relay
+        
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+      entity_category: "diagnostic"
+      disabled_by_default: false
+      icon: mdi:ip-network
+        
+button:
+  - platform: restart
+    icon: mdi:power-cycle
+    name: "ESP Restart"
+
+  - platform: factory_reset
+    name: "ESP Factory Reset"
+    id: factory_reset_all
+    disabled_by_default: True
+        
+switch:
+  - platform: gpio
+    name: "S19E"
+    icon: mdi:power-plug
+    pin: GPIO12
+    id: relay
+    restore_mode: RESTORE_DEFAULT_OFF
+
+status_led:
+  pin:
+    number: GPIO04
+    inverted: False
