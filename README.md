@@ -72,7 +72,13 @@ Nếu không muốn cài đặt môi trường ESPHome, bạn có thể flash tr
 ![Tool nạp .bin cho esp](images/Tool.png)
 
 4. Đưa module vào chế độ Flash (nối tắt `IO0` xuống `GND` trước khi cấp nguồn) và tiến hành nạp file `.bin`.
-
+5. **Cấu hình WiFi sau khi nạp:** 
+   * Rút dây nối tắt `IO0`- ngắt toàn bộ dây kết nối TTL lắp lại vỏ và cấp điện nguồn cho ổ cắm.
+   * Thiết bị sẽ tự động phát ra một mạng WiFi tạm thời để bạn cấu hình. dùng điện thoại hoặc máy tính kết nối vào mạng WiFi này với thông tin sau:
+     * **SSID:** `S19E-Kiwi`
+     * **Password:** `888888889`
+   * Sau khi kết nối thành công, một trang web sẽ tự động hiển thị (hoặc bạn truy cập địa chỉ `192.168.4.1`) để bạn nhập tên và mật khẩu WiFi nhà mình.
+   * 
 ### Cách 2: Tự biên dịch bằng ESPHome (Tùy biến cấu hình)
 Sử dụng cách này nếu bạn muốn chỉnh sửa nâng cao hoặc thay đổi thông số mặc định:
 
