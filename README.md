@@ -33,7 +33,7 @@ Sau khi nạp thành công và tích hợp qua ESPHome, thiết bị sẽ hiển
 
 ## Hướng dẫn đấu nối và nạp Firmware (Flashing Guide)
 
-Để nạp firmware ESPHome lần đầu cho module **TYWE2S**, bạn cần sử dụng một mạch chuyển đổi **USB-to-UART (FTDI/CH340)** hỗ trợ dòng ra **3.3V**. 
+Để nạp firmware ESPHome lần đầu cho module **TYWE2S**, bạn cần sử dụng một mạch chuyển đổi **USB-to-UART (FTDI/CH340)** có điện áp đầu ra là **3.3V**. 
 
 > ⚠️ **QUAN TRỌNG:** Tuyệt đối KHÔNG cắm ổ cắm vào nguồn điện 220V trong suốt quá trình câu dây và nạp phần mềm. Chỉ cấp nguồn qua mạch FTDI (3.3V).
 
@@ -59,11 +59,26 @@ Hình ảnh hàn dây thực tế từ mạch nạp USB UART vào bo mạch củ
 
 ---
 
-## Các bước tiến hành cài đặt
+## Installation
+
+Bạn có thể lựa chọn một trong hai cách dưới đây để nạp firmware cho thiết bị:
+
+### Cách 1: Nạp file Firmware đã biên dịch sẵn (Nhanh nhất)
+Nếu không muốn cài đặt môi trường ESPHome, bạn có thể flash trực tiếp file `.bin` đã được build sẵn trong kho lưu trữ này:
+
+1. Tải file firmware tại đường dẫn: `firmware/kiwi_s19e.bin`
+2. Sử dụng các công cụ nạp phần mềm phổ biến như **ESPHome Web Tools** (trên trình duyệt Chrome/Edge), **ESPTOOL**, ở đây mình sử dụng **Tasmotizer**.
+
+![Tool nạp .bin cho esp](images/Tool.png)
+
+4. Đưa module vào chế độ Flash (nối tắt `IO0` xuống `GND` trước khi cấp nguồn) và tiến hành nạp file `.bin`.
+
+### Cách 2: Tự biên dịch bằng ESPHome (Tùy biến cấu hình)
+Sử dụng cách này nếu bạn muốn chỉnh sửa nâng cao hoặc thay đổi thông số mặc định:
 
 1. Cài đặt môi trường **ESPHome** trên máy tính hoặc sử dụng Add-on trên Home Assistant.
-2. Copy file `secrets.example.yaml` thành `secrets.yaml` và cấu hình thông tin WiFi của bạn.
-3. **Vào chế độ Flash:** Giữ kết nối chân `IO0` với `GND`, sau đó cắm mạch nạp USB vào máy tính.
-4. Tiến hành biên dịch và nạp firmware bằng lệnh:
+2. Sao chép file `secrets.example.yaml` thành `secrets.yaml` và cấu hình thông tin WiFi của bạn.
+3. Đưa module vào chế độ Flash.
+4. Tiến hành biên dịch và nạp trực tiếp bằng lệnh:
    ```bash
    esphome run kiwi_s19e.yaml
