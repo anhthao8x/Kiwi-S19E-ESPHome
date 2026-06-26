@@ -35,7 +35,7 @@ Sau khi nạp thành công và tích hợp qua ESPHome, thiết bị sẽ hiển
 
 Để nạp firmware ESPHome lần đầu cho module **TYWE2S**, bạn cần sử dụng một mạch chuyển đổi **USB-to-UART (FTDI/CH340)** có điện áp đầu ra là **3.3V**. 
 
-## > ⚠️ **QUAN TRỌNG:** Tuyệt đối KHÔNG cắm ổ cắm vào nguồn điện 220V trong suốt quá trình câu dây và nạp phần mềm. Chỉ cấp nguồn qua mạch FTDI, USB to TTL (3.3V).
+>> ⚠️ **QUAN TRỌNG:** Tuyệt đối KHÔNG cắm ổ cắm vào nguồn điện 220V trong suốt quá trình câu dây và nạp phần mềm. Chỉ cấp nguồn qua mạch FTDI, USB to TTL (3.3V).
 
 ### 1. Sơ đồ đấu nối chân (Pinout)
 
